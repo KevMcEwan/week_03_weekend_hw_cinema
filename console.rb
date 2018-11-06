@@ -40,14 +40,9 @@ ticket3.save
 
 
 
-# customer1.buy_ticket(customer1.id, film1)
+customer1.buy_ticket(customer1.id, film1)
 #
 # p customer1
-
-
-
-
-
 
 
 # Customer.all
@@ -63,19 +58,14 @@ ticket3.save
 #
 # film2.title = "The Mighty Thor"
 # film2.update
-
-p customer1.films_booked
+#
+# p customer1.films_booked
 
 # p film1.customers_booked
 # p customer1.how_many_tickets
 # p film1.how_many_customers
 
 # customer1.buy_ticket(film2.price)
-
-
-
-
-
 
 
 

@@ -70,14 +70,16 @@ class Customer
 
 
   def buy_ticket(customer_id,film)
-    Ticket.new({'customer_id' => customer_id, 'film_id' => film.id})
-    sql = "UPDATE customers SET (name, funds) = ($1, $2) WHERE id = $3"
-    values = [@name, @funds-film.price, @id]
-    SqlRunner.run(sql, values)
-    sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2) RETURNING id"
-    values = [customer_id, film.id]
-    ticket = SqlRunner.run(sql, values).first
-    @id = ticket['id'].to_i
+    if @funds > film.price
+      Ticket.new({'customer_id' => customer_id, 'film_id' => film.id})
+      sql = "UPDATE customers SET (name, funds) = ($1, $2) WHERE id = $3"
+      values = [@name, @funds-film.price, @id]
+      SqlRunner.run(sql, values)
+      sql = "INSERT INTO tickets (customer_id, film_id) VALUES ($1, $2) RETURNING id"
+      values = [customer_id, film.id]
+      ticket = SqlRunner.run(sql, values).first
+      @id = ticket['id'].to_i
+    end
   end
 
 
@@ -86,4 +88,4 @@ class Customer
 
 
 
-  end
+end
